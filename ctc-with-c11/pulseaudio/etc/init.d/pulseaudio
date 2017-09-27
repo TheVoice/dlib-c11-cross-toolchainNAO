@@ -1,0 +1,20 @@
+#!/sbin/runscript
+NAOQI_USER="nao"
+
+depend(){
+  need dbus localmount
+  use sysklog
+}
+
+start() {
+  ebegin "Starting PulseAudio"
+  su -c "pulseaudio --start" - ${NAOQI_USER}
+}
+
+stop() {
+  :
+}
+
+restart() {
+  :
+}

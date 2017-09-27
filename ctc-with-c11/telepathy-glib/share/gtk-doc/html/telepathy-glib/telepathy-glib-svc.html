@@ -1,0 +1,369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>The TpSvc* interfaces</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="telepathy-glib API Reference Manual">
+<link rel="up" href="ch-service-dbus.html" title="Service-side D-Bus interfaces">
+<link rel="prev" href="ch-service-dbus.html" title="Service-side D-Bus interfaces">
+<link rel="next" href="telepathy-glib-svc-generic.html" title="Generic service-side interfaces">
+<meta name="generator" content="GTK-Doc V1.17.1 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle">
+<td><a accesskey="p" href="ch-service-dbus.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch-service-dbus.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">telepathy-glib API Reference Manual</th>
+<td><a accesskey="n" href="telepathy-glib-svc-generic.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="refentry">
+<a name="telepathy-glib-svc"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle">
+      The TpSvc* interfaces
+    </span></h2>
+<p>The TpSvc* interfaces — How to export Telepathy objects</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<p>
+    The GInterfaces whose names start with TpSvc are generated automatically
+    from the Telepathy specification, and can be used to make it easier
+    to export methods and signals onto D-Bus. By implementing these
+    GInterfaces you can avoid needing to generate any "glue" using the
+    dbus-glib tools - this is all done internally inside telepathy-glib.
+  </p>
+<p>
+    The media session interface makes a convenient example
+    because it only has two methods (Error() and Ready())
+    and one signal (NewStreamHandler), and media session handlers
+    aren't expected to implement any other interfaces.
+  </p>
+<p>
+    The first thing to do is pre-declare the interface init function,
+    and define the type you'll be using, declaring it to implement the
+    media stream handler interface:
+  </p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">stream_handler_iface_init</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">,</span><span class="normal"> <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">);</span>
+
+<span class="function"><a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#G-DEFINE-TYPE-WITH-CODE:CAPS">G_DEFINE_TYPE_WITH_CODE</a></span><span class="symbol">(</span><span class="normal">GabbleMediaStream</span><span class="symbol">,</span>
+<span class="normal">    gabble_media_stream</span><span class="symbol">,</span>
+<span class="normal">    <a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#G-TYPE-OBJECT:CAPS">G_TYPE_OBJECT</a></span><span class="symbol">,</span>
+<span class="normal">    </span><span class="function"><a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#G-IMPLEMENT-INTERFACE:CAPS">G_IMPLEMENT_INTERFACE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">TP_TYPE_SVC_MEDIA_STREAM_HANDLER</span><span class="symbol">,</span>
+<span class="normal">      stream_handler_iface_init</span><span class="symbol">)</span>
+<span class="normal">    </span><span class="symbol">)</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+    Here we're using a subclass of G_TYPE_OBJECT. You can of course subclass
+    any type.
+  </p>
+<p>
+    If you're implementing more than one interface on the same object,
+    define more than one init function, and call G_IMPLEMENT_INTERFACE
+    more than once. The interface init functions can even be extern
+    if you want to separate off chunks of functionality into a different
+    .c file. For instance, here's GabbleConnection:
+  </p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="comment">/* in header files */</span>
+<span class="type">void</span><span class="normal"> </span><span class="function">conn_aliasing_iface_init</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">,</span><span class="normal"> <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">);</span>
+<span class="type">void</span><span class="normal"> </span><span class="function">conn_avatars_iface_init</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">,</span><span class="normal"> <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">);</span>
+<span class="type">void</span><span class="normal"> </span><span class="function">conn_presence_iface_init</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">,</span><span class="normal"> <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">);</span>
+
+<span class="comment">/* in gabble-connection.c */</span>
+<span class="keyword">static</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">conn_iface_init</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">,</span><span class="normal"> <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">);</span>
+<span class="keyword">static</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">capabilities_iface_init</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">,</span><span class="normal"> <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">);</span>
+
+<span class="function"><a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#G-DEFINE-TYPE-WITH-CODE:CAPS">G_DEFINE_TYPE_WITH_CODE</a></span><span class="symbol">(</span><span class="normal">GabbleConnection</span><span class="symbol">,</span>
+<span class="normal">    gabble_connection</span><span class="symbol">,</span>
+<span class="normal">    TP_TYPE_BASE_CONNECTION</span><span class="symbol">,</span>
+<span class="normal">    </span><span class="function"><a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#G-IMPLEMENT-INTERFACE:CAPS">G_IMPLEMENT_INTERFACE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">TP_TYPE_SVC_CONNECTION</span><span class="symbol">,</span>
+<span class="normal">      conn_iface_init</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="function"><a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#G-IMPLEMENT-INTERFACE:CAPS">G_IMPLEMENT_INTERFACE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">TP_TYPE_SVC_CONNECTION_INTERFACE_ALIASING</span><span class="symbol">,</span>
+<span class="normal">      conn_aliasing_iface_init</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="function"><a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#G-IMPLEMENT-INTERFACE:CAPS">G_IMPLEMENT_INTERFACE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">TP_TYPE_SVC_CONNECTION_INTERFACE_AVATARS</span><span class="symbol">,</span>
+<span class="normal">      conn_avatars_iface_init</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="function"><a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#G-IMPLEMENT-INTERFACE:CAPS">G_IMPLEMENT_INTERFACE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">TP_TYPE_SVC_CONNECTION_INTERFACE_CAPABILITIES</span><span class="symbol">,</span>
+<span class="normal">      capabilities_init</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="function"><a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#G-IMPLEMENT-INTERFACE:CAPS">G_IMPLEMENT_INTERFACE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">TP_TYPE_SVC_CONNECTION_INTERFACE_PRESENCE</span><span class="symbol">,</span>
+<span class="normal">      conn_presence_iface_init</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="symbol">)</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+    The _class_init, _init etc. functions are just like normal, so I
+    won't describe them here. One thing to note, though, is that for
+    signals which are defined by the GInterface, you do not need to do
+    anything in the _class_init - the GInterface has already set the
+    signal up for you.
+  </p>
+<p>
+    For each exported D-Bus method, there's a typedef ending with _impl
+    giving the signature you should use for your method implementation.
+    For example, here's the signature for the Error method on the
+    media session handler interface:
+    </p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="type">void</span><span class="normal"> </span><span class="symbol">(*</span><span class="normal"><a href="telepathy-glib-svc-media-interfaces.html#tp-svc-media-session-handler-error-impl">tp_svc_media_session_handler_error_impl</a></span><span class="symbol">)</span>
+<span class="normal">  </span><span class="symbol">(</span><span class="usertype">TpSvcMediaSessionHandler</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">self</span><span class="symbol">,</span><span class="normal"> </span><span class="usertype">guint</span><span class="normal"> errno</span><span class="symbol">,</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">message</span><span class="symbol">,</span>
+<span class="normal">   </span><span class="usertype">DBusGMethodInvocation</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">context</span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+    and here's the beginning of the corresponding implementation:
+    </p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">gabble_media_session_error</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">TpSvcMediaSessionHandler</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">iface</span><span class="symbol">,</span>
+<span class="normal">                            </span><span class="usertype">guint</span><span class="normal"> errno</span><span class="symbol">,</span>
+<span class="normal">                            </span><span class="keyword">const</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">message</span><span class="symbol">,</span>
+<span class="normal">                            </span><span class="usertype">DBusGMethodInvocation</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">context</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">GabbleMediaSession</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">self </span><span class="symbol">=</span><span class="normal"> </span><span class="function">GABBLE_MEDIA_SESSION</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">iface</span><span class="symbol">);</span>
+
+<span class="normal">  </span><span class="comment">/* do stuff with self here */</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+    All service methods in telepathy-glib are asynchronous - you can of
+    course implement them synchronously if you like, but you have to return
+    the result or error to D-Bus by calling a callback rather than by
+    returning from a function.
+  </p>
+<p>
+    The method implementation's last parameter is a DBusGMethodInvocation.
+    To send the reply, you must either call dbus_g_method_return_error
+    (for a failure), dbus_g_method_return (for a successful return),
+    or an inline function whose name contains "_return_from_" provided by
+    the TpSvc interface. For example, for Error there's an inline function
+    tp_svc_media_session_handler_return_from_error(). These inline functions
+    are just a simple wrapper around dbus_g_method_return() to make it
+    type-safe - it's recommended that you use them where possible.
+  </p>
+<p>
+    For instance, Error doesn't return anything, so
+    tp_svc_media_session_handler_return_from_error() doesn't take any
+    parameters apart from the DBusGMethodInvocation:
+    </p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">gabble_media_session_error</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">TpSvcMediaSessionHandler</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">iface</span><span class="symbol">,</span>
+<span class="normal">                            </span><span class="usertype">guint</span><span class="normal"> errno</span><span class="symbol">,</span>
+<span class="normal">                            </span><span class="keyword">const</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">message</span><span class="symbol">,</span>
+<span class="normal">                            </span><span class="usertype">DBusGMethodInvocation</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">context</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">GabbleMediaSession</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">self </span><span class="symbol">=</span><span class="normal"> </span><span class="function">GABBLE_MEDIA_SESSION</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">iface</span><span class="symbol">);</span>
+
+<span class="normal">  </span><span class="comment">/* do stuff with self here */</span>
+
+<span class="normal">  </span><span class="function"><a href="telepathy-glib-svc-media-interfaces.html#tp-svc-media-session-handler-return-from-error">tp_svc_media_session_handler_return_from_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">context</span><span class="symbol">);</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+  </p>
+<p>
+    As for signals, they're named as dictated by dbus-glib. This normally
+    gives you a sensible lower-case name - for instance NewStreamHandler
+    is mapped to "new-stream-handler".
+  </p>
+<p>
+    To emit a signal, the generated code contains another convenience
+    function whose name contains _emit_. This is prototyped to take
+    the correct arguments for the signal, and emits it efficiently:
+    </p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="telepathy-glib-svc-media-interfaces.html#tp-svc-media-session-handler-emit-new-stream-handler">tp_svc_media_session_handler_emit_new_stream_handler</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">session</span><span class="symbol">,</span>
+<span class="normal">  object_path</span><span class="symbol">,</span><span class="normal"> id</span><span class="symbol">,</span><span class="normal"> media_type</span><span class="symbol">,</span><span class="normal"> <a href="telepathy-glib-enums.html#TP-MEDIA-STREAM-DIRECTION-BIDIRECTIONAL:CAPS">TP_MEDIA_STREAM_DIRECTION_BIDIRECTIONAL</a></span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+  </p>
+<p>
+    Finally, the interface init function needs to be written. Normally
+    you'd set the fields of a vtable to be pointers to your method
+    implementations. However, we couldn't do this in telepathy-glib
+    because that would mean breaking the ABI every time we added methods
+    to an interface. Instead, you call functions, with pointers to your
+    method implementations as a parameter:
+    </p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">session_handler_iface_init</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">gpointer</span><span class="normal"> g_iface</span><span class="symbol">,</span><span class="normal"> </span><span class="usertype">gpointer</span><span class="normal"> iface_data</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">TpSvcMediaSessionHandlerClass</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">klass </span><span class="symbol">=</span>
+<span class="normal">    </span><span class="symbol">(</span><span class="normal"><a href="telepathy-glib-svc-media-interfaces.html#TpSvcMediaSessionHandlerClass">TpSvcMediaSessionHandlerClass</a> </span><span class="symbol">*)</span><span class="normal">g_iface</span><span class="symbol">;</span>
+
+<span class="normal">  </span><span class="function"><a href="telepathy-glib-svc-media-interfaces.html#tp-svc-media-session-handler-implement-error">tp_svc_media_session_handler_implement_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">klass</span><span class="symbol">,</span>
+<span class="normal">      gabble_media_session_error</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="telepathy-glib-svc-media-interfaces.html#tp-svc-media-session-handler-implement-ready">tp_svc_media_session_handler_implement_ready</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">klass</span><span class="symbol">,</span>
+<span class="normal">      gabble_media_session_ready</span><span class="symbol">);</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+    This is obviously quite repetitive if there are a lot of methods, so
+    the convention I've used in telepathy-glib, Gabble and
+    telepathy-sofiasip is to define a temporary macro called IMPLEMENT:
+    </p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">session_handler_iface_init</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">gpointer</span><span class="normal"> g_iface</span><span class="symbol">,</span><span class="normal"> </span><span class="usertype">gpointer</span><span class="normal"> iface_data</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">TpSvcMediaSessionHandlerClass</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">klass </span><span class="symbol">=</span>
+<span class="normal">    </span><span class="symbol">(</span><span class="normal"><a href="telepathy-glib-svc-media-interfaces.html#TpSvcMediaSessionHandlerClass">TpSvcMediaSessionHandlerClass</a> </span><span class="symbol">*)</span><span class="normal">g_iface</span><span class="symbol">;</span>
+
+<span class="preproc">#define</span><span class="normal"> </span><span class="function">IMPLEMENT</span><span class="symbol">(</span><span class="normal">x</span><span class="symbol">)</span><span class="normal"> tp_svc_media_session_handler_implement_##</span><span class="function">x</span><span class="normal"> </span><span class="symbol">(\</span>
+<span class="normal">    klass</span><span class="symbol">,</span><span class="normal"> gabble_media_session_##x</span><span class="symbol">)</span>
+<span class="normal">  </span><span class="function">IMPLEMENT</span><span class="symbol">(</span><span class="normal">error</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function">IMPLEMENT</span><span class="symbol">(</span><span class="normal">ready</span><span class="symbol">);</span>
+<span class="preproc">#undef</span><span class="normal"> IMPLEMENT</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+  </p>
+<p>
+    If you're implementing many interfaces, just write many similar
+    interface init functions.
+  </p>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.17.1</div>
+</body>
+</html>

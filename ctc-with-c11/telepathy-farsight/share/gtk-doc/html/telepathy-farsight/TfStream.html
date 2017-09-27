@@ -1,0 +1,423 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>TfStream</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="telepathy-farsight Reference Manual">
+<link rel="up" href="ch01.html" title="Telepathy Farsight Wrapper Classes">
+<link rel="prev" href="TfChannel.html" title="TfChannel">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="TfChannel.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">telepathy-farsight Reference Manual</th>
+<td> </td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#TfStream.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#TfStream.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#TfStream.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#TfStream.properties" class="shortcut">Properties</a>
+                   | 
+                  <a href="#TfStream.signals" class="shortcut">Signals</a>
+</td></tr>
+</table>
+<div class="refentry" title="TfStream">
+<a name="TfStream"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="TfStream.top_of_page"></a>TfStream</span></h2>
+<p>TfStream — Handles a media Stream</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="TfStream.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">                    <a class="link" href="TfStream.html#TfStream-struct" title="TfStream">TfStream</a>;
+                    <a class="link" href="TfStream.html#TfStreamClass" title="TfStreamClass">TfStreamClass</a>;
+<span class="returnvalue">void</span>                <a class="link" href="TfStream.html#tf-stream-error" title="tf_stream_error ()">tf_stream_error</a>                     (<em class="parameter"><code><a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a> *self</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-enums.html#TpMediaStreamError"><span class="type">TpMediaStreamError</span></a> error</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *message</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               <a class="link" href="TfStream.html#tf-stream-get-id" title="tf_stream_get_id ()">tf_stream_get_id</a>                    (<em class="parameter"><code><a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a> *stream</code></em>);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="TfStream.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+   +----TfStream
+</pre>
+</div>
+<div class="refsect1" title="Properties">
+<a name="TfStream.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="TfStream.html#TfStream--channel" title='The "channel" property'>channel</a>"                  <a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a>*            : Read / Write / Construct Only
+  "<a class="link" href="TfStream.html#TfStream--codec-preferences" title='The "codec-preferences" property'>codec-preferences</a>"        <span class="type">FsCodecGList</span>*         : Read / Write / Construct Only
+  "<a class="link" href="TfStream.html#TfStream--direction" title='The "direction" property'>direction</a>"                <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write / Construct Only
+  "<a class="link" href="TfStream.html#TfStream--farsight-conference" title='The "farsight-conference" property'>farsight-conference</a>"      <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsConference.html"><span class="type">FsConference</span></a>*         : Read / Write / Construct Only
+  "<a class="link" href="TfStream.html#TfStream--farsight-participant" title='The "farsight-participant" property'>farsight-participant</a>"     <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsParticipant.html"><span class="type">FsParticipant</span></a>*        : Read / Write / Construct Only
+  "<a class="link" href="TfStream.html#TfStream--farsight-session" title='The "farsight-session" property'>farsight-session</a>"         <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/farsight2-libs-fs-session.html#FsSession"><span class="type">FsSession</span></a>*            : Read
+  "<a class="link" href="TfStream.html#TfStream--farsight-stream" title='The "farsight-stream" property'>farsight-stream</a>"          <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsStream.html"><span class="type">FsStream</span></a>*             : Read
+  "<a class="link" href="TfStream.html#TfStream--media-type" title='The "media-type" property'>media-type</a>"               <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write / Construct Only
+  "<a class="link" href="TfStream.html#TfStream--nat-properties" title='The "nat-properties" property'>nat-properties</a>"           <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>              : Write / Construct Only
+  "<a class="link" href="TfStream.html#TfStream--proxy" title='The "proxy" property'>proxy</a>"                    <a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-media-interfaces.html#TpMediaStreamHandler"><span class="type">TpMediaStreamHandler</span></a>*  : Read / Write / Construct Only
+  "<a class="link" href="TfStream.html#TfStream--resources" title='The "resources" property'>resources</a>"                <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read
+  "<a class="link" href="TfStream.html#TfStream--sink-pad" title='The "sink-pad" property'>sink-pad</a>"                 <a href="/usr/share/gtk-doc/html/gstreamer-0.10/GstPad.html"><span class="type">GstPad</span></a>*               : Read
+  "<a class="link" href="TfStream.html#TfStream--stream-id" title='The "stream-id" property'>stream-id</a>"                <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write / Construct Only
+  "<a class="link" href="TfStream.html#TfStream--tos" title='The "tos" property'>tos</a>"                      <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write
+</pre>
+</div>
+<div class="refsect1" title="Signals">
+<a name="TfStream.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a class="link" href="TfStream.html#TfStream-closed" title='The "closed" signal'>closed</a>"                                         : Run Last
+  "<a class="link" href="TfStream.html#TfStream-error" title='The "error" signal'>error</a>"                                          : Run Last
+  "<a class="link" href="TfStream.html#TfStream-free-resource" title='The "free-resource" signal'>free-resource</a>"                                  : Run Last
+  "<a class="link" href="TfStream.html#TfStream-request-resource" title='The "request-resource" signal'>request-resource</a>"                               : Run Last
+  "<a class="link" href="TfStream.html#TfStream-src-pad-added" title='The "src-pad-added" signal'>src-pad-added</a>"                                  : Run Last
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="TfStream.description"></a><h2>Description</h2>
+<p>
+These objects handle media streams and wrap the appropriate Farsight 2
+objects. It is used to interact on a stream level with the other parts
+of the media pipeline and the proper UI.
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="TfStream.details"></a><h2>Details</h2>
+<div class="refsect2" title="TfStream">
+<a name="TfStream-struct"></a><h3>TfStream</h3>
+<pre class="programlisting">typedef struct _TfStream TfStream;</pre>
+<p>
+All members are privated
+</p>
+</div>
+<hr>
+<div class="refsect2" title="TfStreamClass">
+<a name="TfStreamClass"></a><h3>TfStreamClass</h3>
+<pre class="programlisting">typedef struct _TfStreamClass TfStreamClass;</pre>
+<p>
+This class is not subclassable
+</p>
+</div>
+<hr>
+<div class="refsect2" title="tf_stream_error ()">
+<a name="tf-stream-error"></a><h3>tf_stream_error ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                tf_stream_error                     (<em class="parameter"><code><a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a> *self</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-enums.html#TpMediaStreamError"><span class="type">TpMediaStreamError</span></a> error</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *message</code></em>);</pre>
+<p>
+This function can be used to tell the connection manager that an error
+has happened on a specific stream.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>a <a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>the error number as a <a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-enums.html#TpMediaStreamError"><span class="type">TpMediaStreamError</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>message</code></em> :</span></p></td>
+<td>the message for this error
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="tf_stream_get_id ()">
+<a name="tf-stream-get-id"></a><h3>tf_stream_get_id ()</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               tf_stream_get_id                    (<em class="parameter"><code><a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a> *stream</code></em>);</pre>
+<p>
+Quick getter for the stream id
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
+<td>A <a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the stream's id
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" title="Property Details">
+<a name="TfStream.property-details"></a><h2>Property Details</h2>
+<div class="refsect2" title='The "channel" property'>
+<a name="TfStream--channel"></a><h3>The <code class="literal">"channel"</code> property</h3>
+<pre class="programlisting">  "channel"                  <a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a>*            : Read / Write / Construct Only</pre>
+<p>The TfChannel this stream is in.</p>
+</div>
+<hr>
+<div class="refsect2" title='The "codec-preferences" property'>
+<a name="TfStream--codec-preferences"></a><h3>The <code class="literal">"codec-preferences"</code> property</h3>
+<pre class="programlisting">  "codec-preferences"        <span class="type">FsCodecGList</span>*         : Read / Write / Construct Only</pre>
+<p>A GList of FsCodec representing preferences to be passed to the fs_session_set_local_preferences() function.</p>
+</div>
+<hr>
+<div class="refsect2" title='The "direction" property'>
+<a name="TfStream--direction"></a><h3>The <code class="literal">"direction"</code> property</h3>
+<pre class="programlisting">  "direction"                <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write / Construct Only</pre>
+<p>The Telepathy stream direction (a TpMediaStreamDirection).</p>
+<p>Allowed values: &lt;= 3</p>
+<p>Default value: 3</p>
+</div>
+<hr>
+<div class="refsect2" title='The "farsight-conference" property'>
+<a name="TfStream--farsight-conference"></a><h3>The <code class="literal">"farsight-conference"</code> property</h3>
+<pre class="programlisting">  "farsight-conference"      <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsConference.html"><span class="type">FsConference</span></a>*         : Read / Write / Construct Only</pre>
+<p>The Farsight conference this stream will create streams within.</p>
+</div>
+<hr>
+<div class="refsect2" title='The "farsight-participant" property'>
+<a name="TfStream--farsight-participant"></a><h3>The <code class="literal">"farsight-participant"</code> property</h3>
+<pre class="programlisting">  "farsight-participant"     <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsParticipant.html"><span class="type">FsParticipant</span></a>*        : Read / Write / Construct Only</pre>
+<p>The Farsight participant this stream will create streams for.</p>
+</div>
+<hr>
+<div class="refsect2" title='The "farsight-session" property'>
+<a name="TfStream--farsight-session"></a><h3>The <code class="literal">"farsight-session"</code> property</h3>
+<pre class="programlisting">  "farsight-session"         <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/farsight2-libs-fs-session.html#FsSession"><span class="type">FsSession</span></a>*            : Read</pre>
+<p>The Farsight session.</p>
+</div>
+<hr>
+<div class="refsect2" title='The "farsight-stream" property'>
+<a name="TfStream--farsight-stream"></a><h3>The <code class="literal">"farsight-stream"</code> property</h3>
+<pre class="programlisting">  "farsight-stream"          <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsStream.html"><span class="type">FsStream</span></a>*             : Read</pre>
+<p>The Farsight stream.</p>
+</div>
+<hr>
+<div class="refsect2" title='The "media-type" property'>
+<a name="TfStream--media-type"></a><h3>The <code class="literal">"media-type"</code> property</h3>
+<pre class="programlisting">  "media-type"               <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write / Construct Only</pre>
+<p>The Telepathy stream media type (as a TpStreamMediaType).</p>
+<p>Allowed values: &lt;= 1</p>
+<p>Default value: 0</p>
+</div>
+<hr>
+<div class="refsect2" title='The "nat-properties" property'>
+<a name="TfStream--nat-properties"></a><h3>The <code class="literal">"nat-properties"</code> property</h3>
+<pre class="programlisting">  "nat-properties"           <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>              : Write / Construct Only</pre>
+<p>A pointer to a TfNatProperties structure detailing which NAT traversal method and parameters to use for this stream.</p>
+</div>
+<hr>
+<div class="refsect2" title='The "proxy" property'>
+<a name="TfStream--proxy"></a><h3>The <code class="literal">"proxy"</code> property</h3>
+<pre class="programlisting">  "proxy"                    <a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-media-interfaces.html#TpMediaStreamHandler"><span class="type">TpMediaStreamHandler</span></a>*  : Read / Write / Construct Only</pre>
+<p>The stream handler proxy which this stream interacts with.</p>
+</div>
+<hr>
+<div class="refsect2" title='The "resources" property'>
+<a name="TfStream--resources"></a><h3>The <code class="literal">"resources"</code> property</h3>
+<pre class="programlisting">  "resources"                <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read</pre>
+<p>The resources held by a TpMediaStreamDirection.</p>
+<p>Allowed values: &lt;= 3</p>
+<p>Default value: 0</p>
+</div>
+<hr>
+<div class="refsect2" title='The "sink-pad" property'>
+<a name="TfStream--sink-pad"></a><h3>The <code class="literal">"sink-pad"</code> property</h3>
+<pre class="programlisting">  "sink-pad"                 <a href="/usr/share/gtk-doc/html/gstreamer-0.10/GstPad.html"><span class="type">GstPad</span></a>*               : Read</pre>
+<p>This sink pad that data has to be sent.</p>
+</div>
+<hr>
+<div class="refsect2" title='The "stream-id" property'>
+<a name="TfStream--stream-id"></a><h3>The <code class="literal">"stream-id"</code> property</h3>
+<pre class="programlisting">  "stream-id"                <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write / Construct Only</pre>
+<p>A number identifying this stream within its channel.</p>
+<p>Default value: 0</p>
+</div>
+<hr>
+<div class="refsect2" title='The "tos" property'>
+<a name="TfStream--tos"></a><h3>The <code class="literal">"tos"</code> property</h3>
+<pre class="programlisting">  "tos"                      <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write</pre>
+<p>The IP Type of Service to set on sent packets.</p>
+<p>Allowed values: &lt;= 255</p>
+<p>Default value: 0</p>
+</div>
+</div>
+<div class="refsect1" title="Signal Details">
+<a name="TfStream.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2" title='The "closed" signal'>
+<a name="TfStream-closed"></a><h3>The <code class="literal">"closed"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a> *stream,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>  user_data)      : Run Last</pre>
+<p>
+This signal is emitted when the <code class="function">Close()</code> signal is received from the
+connection manager.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
+<td>the stream that has been closed
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "error" signal'>
+<a name="TfStream-error"></a><h3>The <code class="literal">"error"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a> *stream,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>  user_data)      : Run Last</pre>
+<p>
+This signal is emitted when there is an error on this stream
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
+<td>the stream that has been errored
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "free-resource" signal'>
+<a name="TfStream-free-resource"></a><h3>The <code class="literal">"free-resource"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a> *stream,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>     direction,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>  user_data)      : Run Last</pre>
+<p>
+Emitted when the stream no longer needs a resource allocated
+from <a class="link" href="TfStream.html#TfStream-request-resource" title='The "request-resource" signal'><span class="type">"request-resource"</span></a> and it can be freed.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
+<td>the stream for which resources can be freed
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>direction</code></em> :</span></p></td>
+<td>The direction for which this resource is freed
+ (as a <span class="type">TpMediaDirection</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "request-resource" signal'>
+<a name="TfStream-request-resource"></a><h3>The <code class="literal">"request-resource"</code> signal</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            user_function                      (<a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a> *stream,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>     direction,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>  user_data)      : Run Last</pre>
+<p>
+This signal is emitted when the connection manager ask to send or receive
+media. For example, this can be used allocated an X window or open a
+camera. The resouces can later be freed on <a class="link" href="TfStream.html#TfStream-free-resource" title='The "free-resource" signal'><span class="type">"free-resource"</span></a>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
+<td>the stream requesting the resources
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>direction</code></em> :</span></p></td>
+<td>The direction for which this resource is requested
+ (as a <span class="type">TpMediaDirection</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the resources requested could be allocated or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>
+otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "src-pad-added" signal'>
+<a name="TfStream-src-pad-added"></a><h3>The <code class="literal">"src-pad-added"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a> *stream,
+                                                        <a href="/usr/share/gtk-doc/html/gstreamer-0.10/GstPad.html"><span class="type">GstPad</span></a>   *pad,
+                                                        <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/farsight2-libs-FsCodec.html#FsCodec"><span class="type">FsCodec</span></a>  *codec,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>  user_data)      : Run Last</pre>
+<p>
+This is emitted when a new src pad comes out. The user must connect
+this pad to his pipeline.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
+<td>the stream which has a new pad
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pad</code></em> :</span></p></td>
+<td>The new src pad
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>codec</code></em> :</span></p></td>
+<td>the codec for which data is coming out
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.15</div>
+</body>
+</html>

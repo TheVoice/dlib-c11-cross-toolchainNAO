@@ -1,0 +1,71 @@
+#!/sbin/runscript
+##
+## This file was generated.
+##
+## Copyright (C) 2010, 2011, 2012 Aldebaran Robotics
+##
+
+LIRCCONF="/home/nao/remotes/lircd.conf"
+
+check_dir(){
+  remotesdir="/home/nao/remotes /home/nao/remotes/config"
+  for folder in ${remotesdir}; do
+    if ! test -d ${folder}; then
+      mkdir ${folder}
+    fi
+    if test -G ${folder}; then
+      chown nao:nao ${folder}
+    fi
+  done
+  if ! test -f ${LIRCCONF}; then
+    cp /etc/lirc/nao2nao ${LIRCCONF}
+    chown nao:nao ${LIRCCONF}
+  fi
+  if test $(hexdump -n 4 -e '"%x" "\n"' ${LIRCCONF}) -eq 0; then
+    cp /etc/lirc/nao2nao ${LIRCCONF}
+    chown nao:nao ${LIRCCONF}
+  fi
+}
+
+depend() {
+  need aldev-i2c localmount
+  before naoqi
+  #provide "a pile of hack"
+}
+
+start() {
+  ebegin "Starting lirc check configuration"
+  if  ! test -d /var/run/lirc; then
+    mkdir -p /var/run/lirc
+    chown -hR nao /var/run/lirc
+  fi
+
+  touch /var/log/lircd
+  chown nao:nao /var/log/lircd
+  touch /var/log/lircd_send
+  chown nao:nao /var/log/lircd_send
+
+  check_dir
+  eend $? # "optional failure message"
+  ebegin "Starting lirc receiving daemon"
+  su -c "/usr/sbin/lircd --output=/var/run/lirc/lircd      --pidfile=/var/run/lirc/lircd.pid      --logfile=/var/log/lircd      ${LIRCCONF}" - nao
+  eend $? # "optional failure message"
+  ebegin "Starting lirc emiting daemon"
+  su -c "/usr/sbin/lircd --output=/var/run/lirc/lircd_send --pidfile=/var/run/lirc/lircd_send.pid --logfile=/var/log/lircd_send ${LIRCCONF}" - nao
+  eend $? # "optional failure message"
+}
+
+stop() {
+  ebegin "Stopping lirc"
+  killall /usr/sbin/lircd
+  rm -rf /var/run/lirc
+  eend $? # "optional failure message"
+}
+
+restart() {
+  ## Commands necessary to restart the service
+  stop
+  ## optional pause:
+  # sleep 2
+  start
+}

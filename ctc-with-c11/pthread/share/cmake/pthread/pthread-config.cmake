@@ -1,0 +1,11 @@
+set(PTHREAD_LIBRARIES
+  ${ALDE_CTC_SYSROOT}/usr/lib/libpthread.so
+  CACHE INTERNAL "" FORCE
+)
+
+set(PTHREAD_INCLUDE_DIRS
+  ${ALDE_CTC_SYSROOT}/usr/include
+  CACHE INTERNAL "" FORCE
+)
+
+export_lib(PTHREAD)

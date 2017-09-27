@@ -1,0 +1,523 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>TfChannel</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="telepathy-farsight Reference Manual">
+<link rel="up" href="ch01.html" title="Telepathy Farsight Wrapper Classes">
+<link rel="prev" href="ch01.html" title="Telepathy Farsight Wrapper Classes">
+<link rel="next" href="TfStream.html" title="TfStream">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">telepathy-farsight Reference Manual</th>
+<td><a accesskey="n" href="TfStream.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#TfChannel.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#TfChannel.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#TfChannel.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#TfChannel.properties" class="shortcut">Properties</a>
+                   | 
+                  <a href="#TfChannel.signals" class="shortcut">Signals</a>
+</td></tr>
+</table>
+<div class="refentry" title="TfChannel">
+<a name="TfChannel"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="TfChannel.top_of_page"></a>TfChannel</span></h2>
+<p>TfChannel — Handle the MediaSignalling interface on a Channel</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="TfChannel.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">                    <a class="link" href="TfChannel.html#TfChannel-struct" title="TfChannel">TfChannel</a>;
+                    <a class="link" href="TfChannel.html#TfChannelClass" title="TfChannelClass">TfChannelClass</a>;
+<a class="link" href="TfChannel.html" title="TfChannel"><span class="returnvalue">TfChannel</span></a> *         <a class="link" href="TfChannel.html#tf-channel-new" title="tf_channel_new ()">tf_channel_new</a>                      (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-channel.html#TpChannel"><span class="type">TpChannel</span></a> *channel_proxy</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="TfChannel.html#tf-channel-error" title="tf_channel_error ()">tf_channel_error</a>                    (<em class="parameter"><code><a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> *chan</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-enums.html#TpMediaStreamError"><span class="type">TpMediaStreamError</span></a> error</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *message</code></em>);
+<a class="link" href="TfStream.html" title="TfStream"><span class="returnvalue">TfStream</span></a> *          <a class="link" href="TfChannel.html#tf-channel-lookup-stream" title="tf_channel_lookup_stream ()">tf_channel_lookup_stream</a>            (<em class="parameter"><code><a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> *chan</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> stream_id</code></em>);
+<span class="returnvalue">void</span>                (<a class="link" href="TfChannel.html#TfChannelStreamFunc" title="TfChannelStreamFunc ()">*TfChannelStreamFunc</a>)              (<em class="parameter"><code><a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> *chan</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> stream_id</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a> *stream</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="TfChannel.html#tf-channel-foreach-stream" title="tf_channel_foreach_stream ()">tf_channel_foreach_stream</a>           (<em class="parameter"><code><a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> *chan</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="TfChannel.html#TfChannelStreamFunc" title="TfChannelStreamFunc ()"><span class="type">TfChannelStreamFunc</span></a> func</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="TfChannel.html#tf-channel-bus-message" title="tf_channel_bus_message ()">tf_channel_bus_message</a>              (<em class="parameter"><code><a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> *channel</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/gstreamer-0.10/gstreamer-GstMessage.html#GstMessage"><span class="type">GstMessage</span></a> *message</code></em>);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="TfChannel.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+   +----TfChannel
+</pre>
+</div>
+<div class="refsect1" title="Properties">
+<a name="TfChannel.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="TfChannel.html#TfChannel--channel" title='The "channel" property'>channel</a>"                  <a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-channel.html#TpChannel"><span class="type">TpChannel</span></a>*            : Read / Write / Construct Only
+  "<a class="link" href="TfChannel.html#TfChannel--object-path" title='The "object-path" property'>object-path</a>"              <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read
+</pre>
+</div>
+<div class="refsect1" title="Signals">
+<a name="TfChannel.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a class="link" href="TfChannel.html#TfChannel-closed" title='The "closed" signal'>closed</a>"                                         : Run Last
+  "<a class="link" href="TfChannel.html#TfChannel-handler-result" title='The "handler-result" signal'>handler-result</a>"                                 : Run Last
+  "<a class="link" href="TfChannel.html#TfChannel-session-created" title='The "session-created" signal'>session-created</a>"                                : Run Last
+  "<a class="link" href="TfChannel.html#TfChannel-session-invalidated" title='The "session-invalidated" signal'>session-invalidated</a>"                            : Run Last
+  "<a class="link" href="TfChannel.html#TfChannel-stream-created" title='The "stream-created" signal'>stream-created</a>"                                 : Run Last
+  "<a class="link" href="TfChannel.html#TfChannel-stream-get-codec-config" title='The "stream-get-codec-config" signal'>stream-get-codec-config</a>"                        : Run Last / Has Details
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="TfChannel.description"></a><h2>Description</h2>
+<p>
+This class handles the
+org.freedesktop.Telepathy.Channel.Interface.MediaSignalling on a
+channel using Farsight2.
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="TfChannel.details"></a><h2>Details</h2>
+<div class="refsect2" title="TfChannel">
+<a name="TfChannel-struct"></a><h3>TfChannel</h3>
+<pre class="programlisting">typedef struct _TfChannel TfChannel;</pre>
+<p>
+All members of the object are private
+</p>
+</div>
+<hr>
+<div class="refsect2" title="TfChannelClass">
+<a name="TfChannelClass"></a><h3>TfChannelClass</h3>
+<pre class="programlisting">typedef struct {
+  GObjectClass parent_class;
+} TfChannelClass;
+</pre>
+<p>
+There are no overridable functions
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObjectClass"><span class="type">GObjectClass</span></a> <em class="structfield"><code><a name="TfChannelClass.parent-class"></a>parent_class</code></em>;</span></p></td>
+<td>the parent <span class="type">GObjecClass</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="tf_channel_new ()">
+<a name="tf-channel-new"></a><h3>tf_channel_new ()</h3>
+<pre class="programlisting"><a class="link" href="TfChannel.html" title="TfChannel"><span class="returnvalue">TfChannel</span></a> *         tf_channel_new                      (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-channel.html#TpChannel"><span class="type">TpChannel</span></a> *channel_proxy</code></em>);</pre>
+<p>
+Creates a new <a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> from an existing channel proxy
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>channel_proxy</code></em> :</span></p></td>
+<td>a <a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-channel.html#TpChannel"><span class="type">TpChannel</span></a> proxy
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new <a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="tf_channel_error ()">
+<a name="tf-channel-error"></a><h3>tf_channel_error ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                tf_channel_error                    (<em class="parameter"><code><a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> *chan</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-enums.html#TpMediaStreamError"><span class="type">TpMediaStreamError</span></a> error</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *message</code></em>);</pre>
+<p>
+Stops the channel and all stream related to it and sends an error to the
+connection manager.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>chan</code></em> :</span></p></td>
+<td>a <a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>the error number of type <a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-enums.html#TpMediaStreamError"><span class="type">TpMediaStreamError</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>message</code></em> :</span></p></td>
+<td>the error message
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="tf_channel_lookup_stream ()">
+<a name="tf-channel-lookup-stream"></a><h3>tf_channel_lookup_stream ()</h3>
+<pre class="programlisting"><a class="link" href="TfStream.html" title="TfStream"><span class="returnvalue">TfStream</span></a> *          tf_channel_lookup_stream            (<em class="parameter"><code><a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> *chan</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> stream_id</code></em>);</pre>
+<p>
+Finds the stream with the specified id if it exists.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>chan</code></em> :</span></p></td>
+<td>a <a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stream_id</code></em> :</span></p></td>
+<td>the stream id to look for
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a> or <a href="/usr/share/gtk-doc/html/liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="TfChannelStreamFunc ()">
+<a name="TfChannelStreamFunc"></a><h3>TfChannelStreamFunc ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                (*TfChannelStreamFunc)              (<em class="parameter"><code><a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> *chan</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> stream_id</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a> *stream</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+<p>
+Callback function called on every stream by <a class="link" href="TfChannel.html#tf-channel-foreach-stream" title="tf_channel_foreach_stream ()"><code class="function">tf_channel_foreach_stream()</code></a>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>chan</code></em> :</span></p></td>
+<td>The <span class="type">TpMediaChannel</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stream_id</code></em> :</span></p></td>
+<td>the id of the stream
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
+<td>the <a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>the passed user data
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="tf_channel_foreach_stream ()">
+<a name="tf-channel-foreach-stream"></a><h3>tf_channel_foreach_stream ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                tf_channel_foreach_stream           (<em class="parameter"><code><a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> *chan</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="TfChannel.html#TfChannelStreamFunc" title="TfChannelStreamFunc ()"><span class="type">TfChannelStreamFunc</span></a> func</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+<p>
+Calls the function func on every stream inside this channel.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>chan</code></em> :</span></p></td>
+<td>a <a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
+<td>the function to call on every stream in this channel
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>data that will be passed to the function
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="tf_channel_bus_message ()">
+<a name="tf-channel-bus-message"></a><h3>tf_channel_bus_message ()</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            tf_channel_bus_message              (<em class="parameter"><code><a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> *channel</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/gstreamer-0.10/gstreamer-GstMessage.html#GstMessage"><span class="type">GstMessage</span></a> *message</code></em>);</pre>
+<p>
+You must call this function on call messages received on the async bus.
+<a href="/usr/share/gtk-doc/html/gstreamer-0.10/gstreamer-GstMessage.html#GstMessage"><span class="type">GstMessages</span></a> are not modified.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>channel</code></em> :</span></p></td>
+<td>A <a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>message</code></em> :</span></p></td>
+<td>A <a href="/usr/share/gtk-doc/html/gstreamer-0.10/gstreamer-GstMessage.html#GstMessage"><span class="type">GstMessage</span></a> received from the bus
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the message has been handled, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" title="Property Details">
+<a name="TfChannel.property-details"></a><h2>Property Details</h2>
+<div class="refsect2" title='The "channel" property'>
+<a name="TfChannel--channel"></a><h3>The <code class="literal">"channel"</code> property</h3>
+<pre class="programlisting">  "channel"                  <a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-channel.html#TpChannel"><span class="type">TpChannel</span></a>*            : Read / Write / Construct Only</pre>
+<p>Telepathy channel object which this media channel should operate on.</p>
+</div>
+<hr>
+<div class="refsect2" title='The "object-path" property'>
+<a name="TfChannel--object-path"></a><h3>The <code class="literal">"object-path"</code> property</h3>
+<pre class="programlisting">  "object-path"              <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read</pre>
+<p>D-Bus object path of the Telepathy channel which this channel operates on.</p>
+<p>Default value: NULL</p>
+</div>
+</div>
+<div class="refsect1" title="Signal Details">
+<a name="TfChannel.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2" title='The "closed" signal'>
+<a name="TfChannel-closed"></a><h3>The <code class="literal">"closed"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> *arg0,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)      : Run Last</pre>
+<p>
+This function is called after a channel is closed, either because
+it has been closed by the connection manager or because we had a locally
+generated error.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "handler-result" signal'>
+<a name="TfChannel-handler-result"></a><h3>The <code class="literal">"handler-result"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> *error,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   arg1,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)      : Run Last</pre>
+<p>
+This message is emitted when we are ready to handle the channel with <a href="/usr/share/gtk-doc/html/liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a>
+or with an <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> if we can not handle the channel.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> containing the error or <a href="/usr/share/gtk-doc/html/liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a> if there was no error
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "session-created" signal'>
+<a name="TfChannel-session-created"></a><h3>The <code class="literal">"session-created"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a>     *tfchannel,
+                                                        <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsConference.html"><span class="type">FsConference</span></a>  *conference,
+                                                        <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsParticipant.html"><span class="type">FsParticipant</span></a> *participant,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>       user_data)        : Run Last</pre>
+<p>
+This signal is emitted when a new session has been created in the
+connection manager. The user should add the new <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsConference.html"><span class="type">FsConference</span></a> to a pipeline
+and set it to playing. The user should also set any property he wants to
+set.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tfchannel</code></em> :</span></p></td>
+<td>the <a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> which has a new stream
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>conference</code></em> :</span></p></td>
+<td>the <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsConference.html"><span class="type">FsConference</span></a> of the new session
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>participant</code></em> :</span></p></td>
+<td>the <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsParticipant.html"><span class="type">FsParticipant</span></a> of the new session
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "session-invalidated" signal'>
+<a name="TfChannel-session-invalidated"></a><h3>The <code class="literal">"session-invalidated"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a>     *tfchannel,
+                                                        <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsConference.html"><span class="type">FsConference</span></a>  *conference,
+                                                        <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsParticipant.html"><span class="type">FsParticipant</span></a> *participant,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>       user_data)        : Run Last</pre>
+<p>
+This signal is emitted when a session has been invalidated.
+The <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsConference.html"><span class="type">FsConference</span></a> and <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsParticipant.html"><span class="type">FsParticipant</span></a> for this session are returned.
+The <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsConference.html"><span class="type">FsConference</span></a> should be removed from the pipeline.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tfchannel</code></em> :</span></p></td>
+<td>the <a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> which has a new stream
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>conference</code></em> :</span></p></td>
+<td>the <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsConference.html"><span class="type">FsConference</span></a> of the new session
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>participant</code></em> :</span></p></td>
+<td>the <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/FsParticipant.html"><span class="type">FsParticipant</span></a> of the new session
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "stream-created" signal'>
+<a name="TfChannel-stream-created"></a><h3>The <code class="literal">"stream-created"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> *tfchannel,
+                                                        <a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a>  *stream,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)      : Run Last</pre>
+<p>
+This signal is emitted when a new stream has been created in the connection
+manager and a local proxy has been generated.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tfchannel</code></em> :</span></p></td>
+<td>the <a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> which has a new stream
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
+<td>The new <a class="link" href="TfStream.html" title="TfStream"><span class="type">TfStream</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "stream-get-codec-config" signal'>
+<a name="TfChannel-stream-get-codec-config"></a><h3>The <code class="literal">"stream-get-codec-config"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">FsCodecGList</span>*       user_function                      (<a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a> *tfchannel,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>      stream_id,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>      media_type,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>      direction,
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)       : Run Last / Has Details</pre>
+<p>
+This is emitted when a new stream is created and allows the caller to
+specify his codec preferences.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tfchannel</code></em> :</span></p></td>
+<td>the <a class="link" href="TfChannel.html" title="TfChannel"><span class="type">TfChannel</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stream_id</code></em> :</span></p></td>
+<td>The ID of the stream which is requestiing new codec config
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>media_type</code></em> :</span></p></td>
+<td>The <a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-enums.html#TpMediaStreamType"><span class="type">TpMediaStreamType</span></a> of the stream
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>direction</code></em> :</span></p></td>
+<td>The <a href="/usr/share/gtk-doc/html/telepathy-glib/telepathy-glib-enums.html#TpMediaStreamDirection"><span class="type">TpMediaStreamDirection</span></a> of the stream
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a href="/usr/share/gtk-doc/html/farsight2-libs-0.10/farsight2-libs-FsCodec.html#FsCodec"><span class="type">FsCodec</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.15</div>
+</body>
+</html>

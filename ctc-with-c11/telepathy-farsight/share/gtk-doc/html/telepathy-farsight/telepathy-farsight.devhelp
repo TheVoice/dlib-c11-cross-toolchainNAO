@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
+<book xmlns="http://www.devhelp.net/book" title="telepathy-farsight Reference Manual" link="index.html" author="" name="telepathy-farsight">
+  <chapters>
+    <sub name="Telepathy Farsight Wrapper Classes" link="ch01.html">
+      <sub name="TfChannel" link="TfChannel.html"/>
+      <sub name="TfStream" link="TfStream.html"/>
+    </sub>
+  </chapters>
+  <functions>
+    <function name="TfChannel" link="TfChannel.html#TfChannel-struct"/>
+    <function name="TfChannelClass" link="TfChannel.html#TfChannelClass"/>
+    <function name="tf_channel_new ()" link="TfChannel.html#tf-channel-new"/>
+    <function name="tf_channel_error ()" link="TfChannel.html#tf-channel-error"/>
+    <function name="tf_channel_lookup_stream ()" link="TfChannel.html#tf-channel-lookup-stream"/>
+    <function name="TfChannelStreamFunc ()" link="TfChannel.html#TfChannelStreamFunc"/>
+    <function name="tf_channel_foreach_stream ()" link="TfChannel.html#tf-channel-foreach-stream"/>
+    <function name="tf_channel_bus_message ()" link="TfChannel.html#tf-channel-bus-message"/>
+    <function name="The &quot;channel&quot; property" link="TfChannel.html#TfChannel--channel"/>
+    <function name="The &quot;object-path&quot; property" link="TfChannel.html#TfChannel--object-path"/>
+    <function name="The &quot;closed&quot; signal" link="TfChannel.html#TfChannel-closed"/>
+    <function name="The &quot;handler-result&quot; signal" link="TfChannel.html#TfChannel-handler-result"/>
+    <function name="The &quot;session-created&quot; signal" link="TfChannel.html#TfChannel-session-created"/>
+    <function name="The &quot;session-invalidated&quot; signal" link="TfChannel.html#TfChannel-session-invalidated"/>
+    <function name="The &quot;stream-created&quot; signal" link="TfChannel.html#TfChannel-stream-created"/>
+    <function name="The &quot;stream-get-codec-config&quot; signal" link="TfChannel.html#TfChannel-stream-get-codec-config"/>
+    <function name="TfStream" link="TfStream.html#TfStream-struct"/>
+    <function name="TfStreamClass" link="TfStream.html#TfStreamClass"/>
+    <function name="tf_stream_error ()" link="TfStream.html#tf-stream-error"/>
+    <function name="tf_stream_get_id ()" link="TfStream.html#tf-stream-get-id"/>
+    <function name="The &quot;channel&quot; property" link="TfStream.html#TfStream--channel"/>
+    <function name="The &quot;codec-preferences&quot; property" link="TfStream.html#TfStream--codec-preferences"/>
+    <function name="The &quot;direction&quot; property" link="TfStream.html#TfStream--direction"/>
+    <function name="The &quot;farsight-conference&quot; property" link="TfStream.html#TfStream--farsight-conference"/>
+    <function name="The &quot;farsight-participant&quot; property" link="TfStream.html#TfStream--farsight-participant"/>
+    <function name="The &quot;farsight-session&quot; property" link="TfStream.html#TfStream--farsight-session"/>
+    <function name="The &quot;farsight-stream&quot; property" link="TfStream.html#TfStream--farsight-stream"/>
+    <function name="The &quot;media-type&quot; property" link="TfStream.html#TfStream--media-type"/>
+    <function name="The &quot;nat-properties&quot; property" link="TfStream.html#TfStream--nat-properties"/>
+    <function name="The &quot;proxy&quot; property" link="TfStream.html#TfStream--proxy"/>
+    <function name="The &quot;resources&quot; property" link="TfStream.html#TfStream--resources"/>
+    <function name="The &quot;sink-pad&quot; property" link="TfStream.html#TfStream--sink-pad"/>
+    <function name="The &quot;stream-id&quot; property" link="TfStream.html#TfStream--stream-id"/>
+    <function name="The &quot;tos&quot; property" link="TfStream.html#TfStream--tos"/>
+    <function name="The &quot;closed&quot; signal" link="TfStream.html#TfStream-closed"/>
+    <function name="The &quot;error&quot; signal" link="TfStream.html#TfStream-error"/>
+    <function name="The &quot;free-resource&quot; signal" link="TfStream.html#TfStream-free-resource"/>
+    <function name="The &quot;request-resource&quot; signal" link="TfStream.html#TfStream-request-resource"/>
+    <function name="The &quot;src-pad-added&quot; signal" link="TfStream.html#TfStream-src-pad-added"/>
+  </functions>
+</book>

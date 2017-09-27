@@ -1,0 +1,12 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Telepathy-GLib
+Description: GLib utility library for the Telepathy framework
+Version: 0.14.10
+Requires: pkg-config >= 0.21
+Requires.private: dbus-glib-1 >= 0.82, glib-2.0 >= 2.24, gobject-2.0 >= 2.24, gio-2.0 >= 2.24
+Libs: -L${libdir} -ltelepathy-glib
+Cflags: -I${includedir}/telepathy-1.0

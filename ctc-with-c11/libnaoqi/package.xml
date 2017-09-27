@@ -1,0 +1,7 @@
+<package name="libnaoqi" version="0.1">
+  <depends buildtime="true" names="libalmath qiprobes pthread gtest qipython opencv libalmathinternal libqi libqimessaging" />
+  <depends names="libalmath pthread gtest qipython libalmathinternal libqi libqimessaging" runtime="true" />
+  <scm>
+    <git revision="18575627c397f19c2115a76096b33de537309310" />
+  </scm>
+</package>
